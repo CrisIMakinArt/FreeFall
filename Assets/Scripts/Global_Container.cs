@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Global_Container : MonoBehaviour
 {
+    public float y_position = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +30,9 @@ public class Global_Container : MonoBehaviour
     public void Reset()
     {
         return;
+    }
+    public void set_y_pos(float y_pos)
+    {
+        y_position = y_pos;
     }
 }

@@ -8,12 +8,13 @@ using UnityEngine;
 public class Platform_Manager : MonoBehaviour
 {
     SpriteRenderer sprite;
-    gameObject platform;
+    Transform platform;
     public Global_Container global_object;
     public string platformType = "Basic";
     // Start is called before the first frame update
     void Start()
     {
+        global_object = GetComponent<Global_Container>();
         sprite = GetComponent<SpriteRenderer>();
         platform = GetComponent<Transform>();
         switch (platformType)
@@ -41,7 +42,6 @@ public class Platform_Manager : MonoBehaviour
             case "Horizontal":
                 break;
             case "Vertical":
-                sprite.color = new Color(1, 0, 0, 1);
                 break;
         }
     }
