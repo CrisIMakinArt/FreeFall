@@ -17,20 +17,7 @@ public class Global_Container : MonoBehaviour
         
     }
 
-    public void stopVelocity()
-    {
-        return;
-    }
-
-    public void startVelocity()
-    {
-        return;
-    }
-
-    public void Reset()
-    {
-        return;
-    }
+    
     public void set_y_pos(float y_pos)
     {
         y_position = y_pos;

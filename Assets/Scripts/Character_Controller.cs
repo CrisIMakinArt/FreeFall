@@ -7,10 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public float MovementSpeed = 6;
     public float JumpForce = 1;
     private Rigidbody2D _rigidbody;
-    public Transform transform;
     private void Start()
     {
-        transform = GetComponent<Transform>();
+
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -22,5 +21,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
         }
+    }
+
+
+    public void Reset()
+    {
+        transform.position = new Vector3(0, 0, 0);
     }
 }

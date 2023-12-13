@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -9,12 +10,11 @@ public class Platform_Manager : MonoBehaviour
 {
     SpriteRenderer sprite;
     Transform platform;
-    public Global_Container global_object;
+    PlayerMovement player;
     public string platformType = "Basic";
     // Start is called before the first frame update
     void Start()
     {
-        global_object = GetComponent<Global_Container>();
         sprite = GetComponent<SpriteRenderer>();
         platform = GetComponent<Transform>();
         switch (platformType)
@@ -46,40 +46,32 @@ public class Platform_Manager : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            player = other.gameObject.GetComponent<PlayerMovement>();
             switch (platformType)
             {
+                
                 case "Cloud":
-                    global_object.stopVelocity();
                     break;
                 case "Basic":
-                    global_object.Reset();
+                    player.Reset();
                     break;
                 case "Horizontal":
-                    global_object.Reset();
+                    player.Reset();
                     break;
                 case "Vertical":
-                    global_object.Reset();
+                    player.Reset();
                     break;
+
             }
-        }
+        }         
 
 
     }
 
-    void OnCollisionExit(Collision other)
-    {
-        switch (platformType)
-        {
-            case "Cloud":
-                global_object.startVelocity();
-                break;
-        }
-
-    }
 
     void Horizontal()
     {
