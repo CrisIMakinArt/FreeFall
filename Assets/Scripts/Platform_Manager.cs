@@ -12,11 +12,17 @@ public class Platform_Manager : MonoBehaviour
     Transform platform;
     PlayerMovement player;
     public string platformType = "Basic";
+    int kill = 0;
+    public int distance = 5;
+    public int direction = 1;
+    public int speed = 1;
+    public Vector3 start_position;
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         platform = GetComponent<Transform>();
+        start_position = platform.position;
         switch (platformType)
         {
             case "Cloud":
@@ -31,18 +37,26 @@ public class Platform_Manager : MonoBehaviour
             case "Vertical":
                 sprite.color = new Color(1, 0, 0, 1);
                 break;
+            case "Weak":
+                sprite.color = new Color(1, 1, 0, 1);
+                break;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch (platformType)
         {
             case "Horizontal":
+                movement(new Vector3(1, 0, 0));
                 break;
             case "Vertical":
+                movement(new Vector3(0, 1, 0));
                 break;
+        }
+        if (kill == 1) {
+            destroyThis();
         }
     }
 
@@ -65,6 +79,9 @@ public class Platform_Manager : MonoBehaviour
                 case "Vertical":
                     player.Reset();
                     break;
+                case "Weak":
+                    kill = 1;
+                    break;
 
             }
         }         
@@ -81,6 +98,21 @@ public class Platform_Manager : MonoBehaviour
     void Vertical()
     {
         return;
+    }
+
+    void destroyThis()
+    {
+        Destroy(this.gameObject);
+    }
+
+    void movement(Vector3 vec3)
+    {
+        Vector3 current_position = platform.position;
+        if (Vector3.Distance(current_position, start_position) > distance)
+        {
+            direction *= -1;
+        }
+        platform.position += vec3 * direction * speed / 60;
     }
 
 }
