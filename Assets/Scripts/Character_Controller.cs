@@ -4,12 +4,13 @@ using System.Security.Cryptography;
 using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerVelocity = 0.1f;
+    public float playerVelocity = 1.0f;
+    float holdVelocity;
     private float lastY;
-    public float FallingThreshold = -0.001f; 
+    public float FallingThreshold = -0.00001f; 
     [HideInInspector]
     public bool Falling = false;
-    public float Acceleration = 0.2f;
+    public float Acceleration = 0.01f;
     public float MovementSpeed = 6;
     public float JumpForce = 1;
     private Rigidbody2D _rigidbody;
@@ -17,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     {
         lastY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
-        InvokeRepeating("acceleratePlayer", 0, 1.0f);
+        InvokeRepeating("acceleratePlayer", 0, 0.0166f);
+        holdVelocity = playerVelocity;
     }
     void acceleratePlayer()
     {
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else 
         {
-            playerVelocity = Acceleration;
+            playerVelocity = holdVelocity;
         }
     }
 
@@ -46,10 +48,6 @@ public class PlayerMovement : MonoBehaviour
     {
         var movement = Input.GetAxis("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
-        {
-            _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        }
         _rigidbody.gravityScale = playerVelocity;
 
     }
