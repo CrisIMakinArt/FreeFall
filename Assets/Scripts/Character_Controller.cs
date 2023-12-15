@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float FallingThreshold = -0.00001f; 
     [HideInInspector]
     public bool Falling = false;
-    public float Acceleration = 0.01f;
+    public float Acceleration = 0.005f;
     public float MovementSpeed = 6;
     public float JumpForce = 1;
     private Rigidbody2D _rigidbody;
