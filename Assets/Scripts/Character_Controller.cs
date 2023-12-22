@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerVelocity = 0.5f;
@@ -25,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     float velocityPercent = 0;
     bool strong = false;
     public Global_Container globalScript;
+    public string[] poses = { "Pencil", "Cannonball" };
+    int pose_place = 0;
+
+    [SerializeField]
+    private InputActionReference PoseChange;
+    private
 
     private void Start()
     {
@@ -34,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         when they happen more often, so if you lower the time between calls "Aka" set the number from 0.05 to 0.005 or something, the function calls too fast causing distance detection to fail.
         In general this number shouldn't change from 0.05 at all anyway.*/
         sprite = GetComponent<SpriteRenderer>();
+        currentPose = poses[pose_place];   
     }
 
         void acceleratePlayer() //Accelerates the player, assuming the player is falling
@@ -87,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.gravityScale = playerVelocity;
 
             //-----------------------------------------------------------------------------------
+            
+        
             switch (currentPose)
             {
                 case "Pencil":
@@ -105,6 +115,17 @@ public class PlayerMovement : MonoBehaviour
                     sprite.color = new Color(1, 1, 1, 1);
                     break;
             }
+        }
+
+        public void PoseChange(InputAction.CallbackContext context)
+        {
+            switch (pose_place)
+            {
+            case 0: pose_place = 1; break;
+            case 1: pose_place= 0; break;
+            
+            }
+            currentPose = poses[pose_place];
         }
 
         private bool StrongCheck()
