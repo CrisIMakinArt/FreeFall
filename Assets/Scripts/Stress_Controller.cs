@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class Stress_Controller : MonoBehaviour
 {
-    
+    public Global_Container globalScript;
+    public PlayerMovement player;
+    string currentPose;
     public Image stressBar; //Controls the stressBar image
 
     public float stressValue = 1f; //Value of stress, idealy will never go over 100 can, however, be negative, for gaemplay reasons
@@ -15,7 +17,6 @@ public class Stress_Controller : MonoBehaviour
     {
         destress(10); //Odd bug with the stress bar, this fixes it. do not remove
         InvokeRepeating("naturalStressGeneration", 0, 3f); //Calls the natural stress generation function every x amount of seconds. // ("",0,xf)
-        
     }
 
     void Update ()
@@ -31,18 +32,20 @@ public class Stress_Controller : MonoBehaviour
             accrueStress(20);
         }
         //------------------------------------------------------------------------------
+        
+    
     }
     
     public void accrueStress (float Stress) //Can be called to Stress the player by an ammount given
     {
-        stressValue += Stress;
+        stressValue += Stress * (globalScript.PoseDictGetter())[player.currentPose]["panicModifier"];
         stressValue = Mathf.Clamp(stressValue, 0, 100);
         stressBar.fillAmount = stressValue / 100f;
     }
 
     public void destress (float Stress) //Can be called to Stress the player by an ammount given
     {
-        stressValue -= Stress;
+        stressValue -= Stress * (1 / (globalScript.PoseDictGetter())[player.currentPose]["panicModifier"]);
         stressBar.fillAmount = stressValue / 100f;
 
     }
