@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private float lastY;
     public float FallingThreshold = -0.00001f; 
     [HideInInspector]
-    private bool Falling = true; //Keep this on True, to prevent issues with certain other things.
+    public bool Falling = true; //Keep this on True, to prevent issues with certain other things.
     public float Acceleration = 0.05f;
-    public float MovementSpeed = 6;
+    public float MovementSpeed = .1f;
     private Rigidbody2D _rigidbody;
     //------------------------------------------------------------------
     public int testAccell = 0; //test variable
@@ -27,9 +27,9 @@ public class PlayerMovement : MonoBehaviour
         InvokeRepeating("acceleratePlayer", 0, 0.05f); /*Cris- TLDR. Keep the time ammount >= 0.05f, odd bug, what i think happens is the distancepersecondsincelastframe cannot detect differences
         when they happen more often, so if you lower the time between calls "Aka" set the number from 0.05 to 0.005 or something, the function calls too fast causing distance detection to fail.
         In general this number shouldn't change from 0.05 at all anyway.*/
-
-
+        
     }
+    
     void acceleratePlayer() //Accelerates the player, assuming the player is falling
     {
         float distancePerSecondSinceLastFrame = (transform.position.y - lastY) * Time.deltaTime;
@@ -59,11 +59,11 @@ public class PlayerMovement : MonoBehaviour
 
             }
             
+            
         }
         else 
         {
             playerVelocity = holdVelocity;
-            
             testMovement += 1; // test variable
         }
     }
@@ -73,9 +73,10 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------------------------------
         //Left-right movement
         var movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
+        _rigidbody.velocity = new Vector2(movement * MovementSpeed, _rigidbody.velocity.y);
+        // transform.position += new Vector3(movement, 0, 0) * MovementSpeed;
         _rigidbody.gravityScale = playerVelocity;
-        
+
         //-----------------------------------------------------------------------------------
     }
 
@@ -84,5 +85,24 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, 0);
     }
-    
+
+    //-----------------------------------------------------------
+    // Getters and setters
+
+    public bool GetFalling() //Probably unneeded
+    {
+        return Falling;
+    }
+    public float GetVelocity()
+    {
+        return playerVelocity;
+    }
+    public void SetVelocity(float velocity)
+    {
+        playerVelocity = velocity;
+    }
+    public void SetAcceleration (float acceleration)
+    {
+        Acceleration = acceleration;
+    }
 }
