@@ -42,8 +42,9 @@ public class PlayerMovement : MonoBehaviour
         when they happen more often, so if you lower the time between calls "Aka" set the number from 0.05 to 0.005 or something, the function calls too fast causing distance detection to fail.
         In general this number shouldn't change from 0.05 at all anyway.*/
         sprite = GetComponent<SpriteRenderer>();
-        outlineSprite = outline.GetComponent<SpriteRenderer>();
-        currentPose = poses[pose_place];   
+        outlineSprite = outline.GetComponent<SpriteRenderer>();//Outline to show if you can break through
+        currentPose = poses[pose_place];
+        PoseAnimation();
     }
 
         void acceleratePlayer() //Accelerates the player, assuming the player is falling
@@ -104,15 +105,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         public void PoseChange(InputAction.CallbackContext context)
-        {
+        {   //swaps what element in the array the currentPose pulls from
             switch (pose_place)
             {
             case 0: pose_place = 1; break;
             case 1: pose_place= 0; break;
             
             }
-            currentPose = poses[pose_place];
-            switch (currentPose)
+            currentPose = poses[pose_place];//sets currentPose
+            PoseAnimation();
+        }
+
+        private void PoseAnimation()
+        {
+            switch (currentPose)//Uses currentPose to handle color/animation
             {
             case "Pencil":
                 sprite.color = new Color(.8f, 1, 0, 1);
@@ -133,7 +139,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         private bool StrongCheck()
-        {
+        {   //Checks velocity vs max velocity and compares it to a threshold
+            //sets variable if you meet it, allows you to break weak platforms
             if (velocityPercent > (globalScript.PoseDictGetter())[currentPose]["strongThreshold"]) 
             {
                 outlineSprite.color = new Color(.32f, .25f, .25f, 1);
