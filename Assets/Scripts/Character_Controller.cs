@@ -29,9 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public string[] poses = { "Pencil", "Cannonball" };
     int pose_place = 0;
 
-    [SerializeField]
-    private InputActionReference PoseChange;
-    private
+
 
     private void Start()
     {
