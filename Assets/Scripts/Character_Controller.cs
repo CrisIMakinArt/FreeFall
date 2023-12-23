@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
         private void FixedUpdate()
         {
-        if (strong != StrongCheck()) { strong = StrongCheck(); }
+            if (strong != StrongCheck()) { strong = StrongCheck(); }
 
         //-----------------------------------------------------------------------------------
         //Left-right movement
@@ -100,24 +100,7 @@ public class PlayerMovement : MonoBehaviour
             //-----------------------------------------------------------------------------------
             
         
-            switch (currentPose)
-            {
-                case "Pencil":
-                    sprite.color = new Color(.8f, 1, 0, 1);
-                    break;
-                case "Cannonball":
-                    sprite.color = new Color(0, 0, 0, 1);
-                    break;
-                case "SwanDive":
-                    sprite.color = new Color(1, 0, 1, 1);
-                    break;
-                case "Recliner":
-                    sprite.color = new Color(.8f, 1, .2f, 1);
-                    break;
-                case "SnowAngel":
-                    sprite.color = new Color(1, 1, 1, 1);
-                    break;
-            }
+            
         }
 
         public void PoseChange(InputAction.CallbackContext context)
@@ -129,6 +112,24 @@ public class PlayerMovement : MonoBehaviour
             
             }
             currentPose = poses[pose_place];
+            switch (currentPose)
+            {
+            case "Pencil":
+                sprite.color = new Color(.8f, 1, 0, 1);
+                break;
+            case "Cannonball":
+                sprite.color = new Color(0, 0, 0, 1);
+                break;
+            case "SwanDive":
+                sprite.color = new Color(1, 0, 1, 1);
+                break;
+            case "Recliner":
+                sprite.color = new Color(.8f, 1, .2f, 1);
+                break;
+            case "SnowAngel":
+                sprite.color = new Color(1, 1, 1, 1);
+                break;
+            }
         }
 
         private bool StrongCheck()
