@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
         //-----------------------------------------------------------------------------------
         //Left-right movement
-        var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
+            var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
             _rigidbody.velocity = new Vector2(movement * MovementSpeed, _rigidbody.velocity.y);
             // transform.position += new Vector3(movement, 0, 0) * MovementSpeed;
             _rigidbody.gravityScale = playerVelocity;
