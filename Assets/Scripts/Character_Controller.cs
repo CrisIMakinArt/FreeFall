@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerVelocity = 0.5f;
+    public float playerVelocity = 3;
     public float TerminalVelocity = 10;
-    public float holdVelocity = 0.5f;
+    public float holdVelocity = 3;
     private float lastY;
     public float FallingThreshold = -0.00001f; 
     [HideInInspector]
