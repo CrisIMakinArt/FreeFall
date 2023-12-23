@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @FreeFallInputs: IInputActionCollection2, IDisposable
+public partial class @InputFreeFall: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @FreeFallInputs()
+    public @InputFreeFall()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""FreeFallInputs"",
@@ -963,8 +963,8 @@ public partial class @FreeFallInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PoseChange;
     public struct PlayerActions
     {
-        private @FreeFallInputs m_Wrapper;
-        public PlayerActions(@FreeFallInputs wrapper) { m_Wrapper = wrapper; }
+        private @InputFreeFall m_Wrapper;
+        public PlayerActions(@InputFreeFall wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
@@ -1039,8 +1039,8 @@ public partial class @FreeFallInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     public struct UIActions
     {
-        private @FreeFallInputs m_Wrapper;
-        public UIActions(@FreeFallInputs wrapper) { m_Wrapper = wrapper; }
+        private @InputFreeFall m_Wrapper;
+        public UIActions(@InputFreeFall wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
