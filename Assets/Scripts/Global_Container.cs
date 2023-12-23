@@ -23,22 +23,22 @@ public class Global_Container : MonoBehaviour
 
         SwanDive.Add(Modifiers[0], 1.5f);
         SwanDive.Add(Modifiers[1], .65f);
-        SwanDive.Add(Modifiers[2], .35f);
+        SwanDive.Add(Modifiers[2], .15f);
         SwanDive.Add(Modifiers[3], 1.5f);
 
         SnowAngel.Add(Modifiers[0], .5f);
         SnowAngel.Add(Modifiers[1], 1.4f);
-        SnowAngel.Add(Modifiers[2], .99f);
+        SnowAngel.Add(Modifiers[2], .5f);
         SnowAngel.Add(Modifiers[3], 1.2f);
 
         Recliner.Add(Modifiers[0], .75f);
         Recliner.Add(Modifiers[1], 1.25f);
-        Recliner.Add(Modifiers[2], .85f);
+        Recliner.Add(Modifiers[2], .4f);
         Recliner.Add(Modifiers[3], .5f);
 
         Pencil.Add(Modifiers[0], 1f);
         Pencil.Add(Modifiers[1], 1f);
-        Pencil.Add(Modifiers[2], .5f);
+        Pencil.Add(Modifiers[2], .35f);
         Pencil.Add(Modifiers[3], 1f);
 
         Pose_Dict.Add(Categories[0], Cannonball);

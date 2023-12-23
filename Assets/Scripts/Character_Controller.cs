@@ -20,11 +20,14 @@ public class PlayerMovement : MonoBehaviour
     public int testMovement = 0; //test variable
     public int testTerminal = 0;
 
+    public GameObject outline;
+
     SpriteRenderer sprite;
+    SpriteRenderer outlineSprite;
     public string currentPose = "Pencil";
 
-    float velocityPercent = 0;
-    bool strong = false;
+    public float velocityPercent = 0;
+    public bool strong = false;
     public Global_Container globalScript;
     public string[] poses = { "Pencil", "Cannonball" };
     int pose_place = 0;
@@ -39,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         when they happen more often, so if you lower the time between calls "Aka" set the number from 0.05 to 0.005 or something, the function calls too fast causing distance detection to fail.
         In general this number shouldn't change from 0.05 at all anyway.*/
         sprite = GetComponent<SpriteRenderer>();
+        outlineSprite = outline.GetComponent<SpriteRenderer>();
         currentPose = poses[pose_place];   
     }
 
@@ -84,10 +88,11 @@ public class PlayerMovement : MonoBehaviour
 
         private void FixedUpdate()
         {
-            strong = StrongCheck();
-            //-----------------------------------------------------------------------------------
-            //Left-right movement
-            var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
+        if (strong != StrongCheck()) { strong = StrongCheck(); }
+
+        //-----------------------------------------------------------------------------------
+        //Left-right movement
+        var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
             _rigidbody.velocity = new Vector2(movement * MovementSpeed, _rigidbody.velocity.y);
             // transform.position += new Vector3(movement, 0, 0) * MovementSpeed;
             _rigidbody.gravityScale = playerVelocity;
@@ -128,9 +133,16 @@ public class PlayerMovement : MonoBehaviour
 
         private bool StrongCheck()
         {
-            print((globalScript.PoseDictGetter()));
-            if (velocityPercent > (globalScript.PoseDictGetter())[currentPose]["strongThreshold"]) { return true; }
-            else { return false; }
+            if (velocityPercent > (globalScript.PoseDictGetter())[currentPose]["strongThreshold"]) 
+            {
+                outlineSprite.color = new Color(.32f, .25f, .25f, 1);
+                return true; 
+            }
+            else 
+            {
+                outlineSprite.color = new Color(.32f, .25f, .25f, 0);
+                return false; 
+            }
         }
 
         public void Reset() //Resets player to orgin.

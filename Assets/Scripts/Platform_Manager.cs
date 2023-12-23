@@ -58,6 +58,8 @@ public class Platform_Manager : MonoBehaviour
         if (kill == 1) {
             destroyThis();
         }
+        
+            
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -80,7 +82,11 @@ public class Platform_Manager : MonoBehaviour
                     player.Reset();
                     break;
                 case "Weak":
-                    kill = 1;
+                    if (player.strong)
+                    {
+                        kill = 1;
+                    }
+                    else { player.Reset(); }
                     break;
 
             }

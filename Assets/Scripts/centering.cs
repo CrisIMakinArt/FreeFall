@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class centering : MonoBehaviour
 {
 
     Transform parentObject;
+    public PlayerMovement player;
     // Start is called before the first frame update
     void Start()
     {
