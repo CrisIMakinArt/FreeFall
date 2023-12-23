@@ -90,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
         private void FixedUpdate()
         {
             if (strong != StrongCheck()) { strong = StrongCheck(); }
-
         //-----------------------------------------------------------------------------------
         //Left-right movement
             var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
@@ -152,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
                 return false; 
             }
         }
+
 
         public void Reset() //Resets player to orgin.
         {
