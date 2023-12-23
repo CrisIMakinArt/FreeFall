@@ -46,11 +46,30 @@ public class Stress_Controller : MonoBehaviour
     public void destress (float Stress) //Can be called to Stress the player by an ammount given
     {
         stressValue -= Stress * (1 / (globalScript.PoseDictGetter())[player.currentPose]["panicModifier"]);
+        stressValue = Mathf.Clamp(stressValue, 0, 100);
         stressBar.fillAmount = stressValue / 100f;
 
     }
     void naturalStressGeneration() //Naturally generates stress if player is falling
-    { 
-        accrueStress(3);
+    {
+        float Velocity = player.playerVelocity;
+    
+        if (Velocity > 0.5 && Velocity < 5)
+        {
+            accrueStress(3);
+        }
+        else if (5 <= Velocity && Velocity <= 7)
+        {
+            accrueStress(7);
+        }
+        else if (7 < Velocity && Velocity < 10)
+        {
+            accrueStress(10);
+        }
+        else if (Velocity >= 10)
+        {
+            accrueStress(20);
+        }
+
     }
 }
