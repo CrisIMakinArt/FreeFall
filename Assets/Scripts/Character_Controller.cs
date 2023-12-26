@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         outlineSprite = outline.GetComponent<SpriteRenderer>();
         currentPose = poses[pose_place];
+        PoseAnimation();
     }
 
     void acceleratePlayer() //Accelerates the player, assuming the player is falling
@@ -119,6 +120,11 @@ public class PlayerMovement : MonoBehaviour
 
         }
         currentPose = poses[pose_place];
+        PoseAnimation();
+    }
+
+    public void PoseAnimation()
+    {
         switch (currentPose)
         {
             case "Pencil":

@@ -38,14 +38,14 @@ public class Stress_Controller : MonoBehaviour
     
     public void accrueStress (float Stress) //Can be called to Stress the player by an ammount given
     {
-        stressValue += Stress * (globalScript.PoseDictGetter())[player.currentPose]["panicModifier"];
+        stressValue += Stress;
         stressValue = Mathf.Clamp(stressValue, 0, 100);
         stressBar.fillAmount = stressValue / 100f;
     }
 
     public void destress (float Stress) //Can be called to Stress the player by an ammount given
     {
-        stressValue -= Stress * (1 / (globalScript.PoseDictGetter())[player.currentPose]["panicModifier"]);
+        stressValue -= Stress;
         stressValue = Mathf.Clamp(stressValue, 0, 100);
         stressBar.fillAmount = stressValue / 100f;
 
