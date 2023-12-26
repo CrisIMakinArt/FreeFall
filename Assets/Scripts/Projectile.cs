@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public GameObject trigger;
     PlayerMovement player;
     private Rigidbody2D rb;
     bool kill = false;
@@ -42,9 +41,13 @@ public class Projectile : MonoBehaviour
 
 
     }
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        rb.gravityScale = -1.5f;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            rb.gravityScale = -1.5f;
+        }
+            
     }
 
     void destroyThis()
