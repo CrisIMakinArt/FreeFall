@@ -23,11 +23,15 @@ public class Velocity_UI : MonoBehaviour
 
     void Start()
     {
+
         updateGraphic();        
+
     }
 
     public void updateGraphic()
     {
         velocityText.text = (Mathf.Round(velocity * 100)).ToString() + " mph";
     }
+
 }
+

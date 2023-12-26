@@ -41,4 +41,6 @@ public class Stress_UI : MonoBehaviour
         textMesh.text = Mathf.Round(_stress * 100).ToString() + '%';
         sliderFillBody.color = Color.Lerp(goodColor, badColor, _stress);
     }
+
 }
+
