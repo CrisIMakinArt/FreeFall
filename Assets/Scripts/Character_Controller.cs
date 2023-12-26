@@ -12,16 +12,16 @@ public class PlayerMovement : MonoBehaviour
 
     -------------UI----------------- */
 
-
-    public float playerVelocity = 0.5f;
-    public float TerminalVelocity = 500;
-    public float holdVelocity = 0.5f;
+    public float holdVelocity = 50f;
+    public float playerVelocity = 0.1f;
+    public float TerminalVelocity = 450;
+    
     private float lastY;
     public float FallingThreshold = -0.00001f;
     [HideInInspector]
     public bool Falling = true; //Keep this on True, to prevent issues with certain other things.
-    public float Acceleration = 20f;
-    public float MovementSpeed = 6f;
+    public float Acceleration = 1.5f;
+    public float MovementSpeed = 8f;
     private Rigidbody2D _rigidbody;
     //------------------------------------------------------------------
     public int testAccell = 0; //test variable

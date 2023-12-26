@@ -2884,9 +2884,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
+      propertyPath: Acceleration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
       propertyPath: globalScript
       value: 
       objectReference: {fileID: 1000120015}
+    - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
+      propertyPath: holdVelocity
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
+      propertyPath: MovementSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
+      propertyPath: playerVelocity
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446162118414142811, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
+      propertyPath: TerminalVelocity
+      value: 450
+      objectReference: {fileID: 0}
     - target: {fileID: 7365550222801700023, guid: 2becbea49ef9a8b47a744baf50a3fa73, type: 3}
       propertyPath: m_Name
       value: Player

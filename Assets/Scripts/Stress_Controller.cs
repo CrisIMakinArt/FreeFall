@@ -53,20 +53,25 @@ public class Stress_Controller : MonoBehaviour
     void naturalStressGeneration() //Naturally generates stress if player is falling
     {
         float Velocity = player.playerVelocity;
-    
-        if (Velocity > 0.5 && Velocity < 5)
+        float minVelocity = player.holdVelocity;
+        float maxVelocity = player.TerminalVelocity;
+        if (Velocity == minVelocity)
+        {
+            destress(20);
+        }
+        else if (Velocity > minVelocity && Velocity < (maxVelocity / 3))
         {
             accrueStress(3);
         }
-        else if (5 <= Velocity && Velocity <= 7)
+        else if (Velocity >= (maxVelocity/3) && Velocity < (maxVelocity * (2/3)))
         {
             accrueStress(7);
         }
-        else if (7 < Velocity && Velocity < 10)
+        else if (Velocity >= (maxVelocity * (2 / 3)) && Velocity < maxVelocity)
         {
             accrueStress(10);
         }
-        else if (Velocity >= 10)
+        else if (Velocity == maxVelocity)
         {
             accrueStress(20);
         }
