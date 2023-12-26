@@ -5,15 +5,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerVelocity = 3;
-    public float TerminalVelocity = 10;
-    public float holdVelocity = 3;
+    /* -------------UI----------------- 
+
+    public Stress_UI stress_UI;
+    public Velocity_UI velocity_UI;
+
+    -------------UI----------------- */
+
+
+    public float playerVelocity = 0.5f;
+    public float TerminalVelocity = 500;
+    public float holdVelocity = 0.5f;
     private float lastY;
-    public float FallingThreshold = -0.00001f; 
+    public float FallingThreshold = -0.00001f;
     [HideInInspector]
     public bool Falling = true; //Keep this on True, to prevent issues with certain other things.
-    public float Acceleration = 0.05f;
-    public float MovementSpeed = .1f;
+    public float Acceleration = 20f;
+    public float MovementSpeed = 6f;
     private Rigidbody2D _rigidbody;
     //------------------------------------------------------------------
     public int testAccell = 0; //test variable
@@ -32,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
     public string[] poses = { "Pencil", "Cannonball" };
     int pose_place = 0;
 
-
-
     private void Start()
     {
         lastY = transform.position.y;
@@ -43,77 +49,78 @@ public class PlayerMovement : MonoBehaviour
         In general this number shouldn't change from 0.05 at all anyway.*/
         sprite = GetComponent<SpriteRenderer>();
         outlineSprite = outline.GetComponent<SpriteRenderer>();
-        currentPose = poses[pose_place];   
+        currentPose = poses[pose_place];
     }
 
-        void acceleratePlayer() //Accelerates the player, assuming the player is falling
+    void acceleratePlayer() //Accelerates the player, assuming the player is falling
+    {
+        float distancePerSecondSinceLastFrame = (transform.position.y - lastY) * Time.deltaTime;
+        lastY = transform.position.y;
+        if (distancePerSecondSinceLastFrame < FallingThreshold) //Checks if player is falling
         {
-            float distancePerSecondSinceLastFrame = (transform.position.y - lastY) * Time.deltaTime;
-            lastY = transform.position.y;
-            if (distancePerSecondSinceLastFrame < FallingThreshold) //Checks if player is falling
+            Falling = true;
+        }
+        else
+        {
+            Falling = false;
+        }
+
+        if (Falling) // if falling - accelerate player by the Acceleration variable
+        {
+            if (playerVelocity >= TerminalVelocity) //Checks if player is at terminal velocity. If there then set player velocity to terminal. 
+            /* Cris- This could cause some issues in the future, I have playerVelocity = TerminalVelocity; as a safeguard for potential bugs.
+                However, if this causes other issues then removing it shouldn't be a problem */
             {
-                Falling = true;
+                playerVelocity = TerminalVelocity;
+                testTerminal += 1; //test variable
             }
             else
             {
-                Falling = false;
-            }
-
-            if (Falling) // if falling - accelerate player by the Acceleration variable
-            {
-                if (playerVelocity >= TerminalVelocity) //Checks if player is at terminal velocity. If there then set player velocity to terminal. 
-                /* Cris- This could cause some issues in the future, I have playerVelocity = TerminalVelocity; as a safeguard for potential bugs.
-                 However, if this causes other issues then removing it shouldn't be a problem */
-                {
-                    playerVelocity = TerminalVelocity;
-                    testTerminal += 1; //test variable
-                }
-                else
-                {
-                    playerVelocity += Acceleration * (globalScript.PoseDictGetter())[currentPose]["accelerationModifier"];
-                    testAccell += 1; //test variable
-
-                }
-
+                playerVelocity += Acceleration * (globalScript.PoseDictGetter())[currentPose]["accelerationModifier"];
+                testAccell += 1; //test variable
 
             }
-            else
-            {
-                playerVelocity = holdVelocity;
-                testMovement += 1; // test variable
-            }
-            velocityPercent = playerVelocity / TerminalVelocity;
+
 
         }
-
-        private void FixedUpdate()
+        else
         {
-            if (strong != StrongCheck()) { strong = StrongCheck(); }
-
-        //-----------------------------------------------------------------------------------
-        //Left-right movement
-            var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
-            _rigidbody.velocity = new Vector2(movement * MovementSpeed, _rigidbody.velocity.y);
-            // transform.position += new Vector3(movement, 0, 0) * MovementSpeed;
-            _rigidbody.gravityScale = playerVelocity;
-
-            //-----------------------------------------------------------------------------------
-            
-        
-            
+            playerVelocity = holdVelocity;
+            testMovement += 1; // test variable
         }
+        velocityPercent = playerVelocity / TerminalVelocity;
 
-        public void PoseChange(InputAction.CallbackContext context)
+    }
+
+    private void FixedUpdate()
+    {
+        if (strong != StrongCheck()) { strong = StrongCheck(); }
+
+        //-------------------------------Left-right movement----------------------------------------------
+        var movement = Input.GetAxis("Horizontal") * (globalScript.PoseDictGetter())[currentPose]["horizontalModifier"];
+        _rigidbody.velocity = new Vector2(movement * MovementSpeed, _rigidbody.velocity.y);
+        _rigidbody.gravityScale = playerVelocity;
+
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Min(-_rigidbody.velocity.y, TerminalVelocity));
+        //-------------------------------Left-right movement----------------------------------------------
+
+
+        //---------------------UI-------------------------------
+        //velocity_UI.velocity = -_rigidbody.velocity.y;
+        //---------------------UI-------------------------------
+    }
+
+    public void PoseChange(InputAction.CallbackContext context)
+    {
+        switch (pose_place)
         {
-            switch (pose_place)
-            {
             case 0: pose_place = 1; break;
-            case 1: pose_place= 0; break;
-            
-            }
-            currentPose = poses[pose_place];
-            switch (currentPose)
-            {
+            case 1: pose_place = 0; break;
+
+        }
+        currentPose = poses[pose_place];
+        switch (currentPose)
+        {
             case "Pencil":
                 sprite.color = new Color(.8f, 1, 0, 1);
                 break;
@@ -129,45 +136,45 @@ public class PlayerMovement : MonoBehaviour
             case "SnowAngel":
                 sprite.color = new Color(1, 1, 1, 1);
                 break;
-            }
-        }
-
-        private bool StrongCheck()
-        {
-            if (velocityPercent > (globalScript.PoseDictGetter())[currentPose]["strongThreshold"]) 
-            {
-                outlineSprite.color = new Color(.32f, .25f, .25f, 1);
-                return true; 
-            }
-            else 
-            {
-                outlineSprite.color = new Color(.32f, .25f, .25f, 0);
-                return false; 
-            }
-        }
-
-        public void Reset() //Resets player to orgin.
-        {
-            transform.position = new Vector3(0, 0, 0);
-        }
-
-        //-----------------------------------------------------------
-        // Getters and setters
-
-        public bool GetFalling() //Probably unneeded
-        {
-            return Falling;
-        }
-        public float GetVelocity()
-        {
-            return playerVelocity;
-        }
-        public void SetVelocity(float velocity)
-        {
-            playerVelocity = velocity;
-        }
-        public void SetAcceleration(float acceleration)
-        {
-            Acceleration = acceleration;
         }
     }
+
+    private bool StrongCheck()
+    {
+        if (velocityPercent > (globalScript.PoseDictGetter())[currentPose]["strongThreshold"])
+        {
+            outlineSprite.color = new Color(.32f, .25f, .25f, 1);
+            return true;
+        }
+        else
+        {
+            outlineSprite.color = new Color(.32f, .25f, .25f, 0);
+            return false;
+        }
+    }
+
+    public void Reset() //Resets player to orgin.
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
+
+    //-----------------------------------------------------------
+    // Getters and setters
+
+    public bool GetFalling() //Probably unneeded
+    {
+        return Falling;
+    }
+    public float GetVelocity()
+    {
+        return playerVelocity;
+    }
+    public void SetVelocity(float velocity)
+    {
+        playerVelocity = velocity;
+    }
+    public void SetAcceleration(float acceleration)
+    {
+        Acceleration = acceleration;
+    }
+}
