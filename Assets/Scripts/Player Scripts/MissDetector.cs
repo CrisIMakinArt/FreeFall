@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class MissDetector : MonoBehaviour
 {
-   Player._rigidbody;
 
-   
 }
