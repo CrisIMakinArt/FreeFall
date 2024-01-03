@@ -33,7 +33,6 @@ public class Stress_Controller : MonoBehaviour
         }
         //------------------------------------------------------------------------------
         
-    
     }
     
     public void accrueStress (float Stress) //Can be called to Stress the player by an ammount given
