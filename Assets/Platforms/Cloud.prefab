@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 759763784957658342}
   - component: {fileID: 4356651637279793698}
   - component: {fileID: 3548516984394990352}
+  - component: {fileID: -3757712387059690408}
   m_Layer: 0
   m_Name: Cloud
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,3 +177,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3757712387059690408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369489729383265698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3232baa08f3e55649903f72435c9c254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Platform: Platform
