@@ -7,6 +7,8 @@ using TMPro;
 public class MasterMenu : MonoBehaviour
 {
     public GameObject menuUI;
+    public GameObject optionsUI;
+
     bool unpausing = false;
     public int unpausingTime = 30;
     float unpausingStartTime = 0;
@@ -68,5 +70,17 @@ public class MasterMenu : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene("Menu");
+    }
+
+    public void LoadOptions()
+    {
+        optionsUI.SetActive(true);
+        menuUI.SetActive(false);
+    }
+
+    public void CloseOptions()
+    {
+        menuUI.SetActive(true);
+        optionsUI.SetActive(false);
     }
 }
