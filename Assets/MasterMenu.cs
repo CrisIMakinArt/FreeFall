@@ -38,7 +38,7 @@ public class MasterMenu : MonoBehaviour
 
             unpauseText.fontSize = Mathf.Abs(Mathf.Sin(currentDelay * Mathf.PI + 0.5f * Mathf.PI)) * fontSize;
 
-            if (currentDelay >= unpausingTime)
+            if (currentDelay >= unpausingTime + .5f)
             {
                 unpausing = false;
                 unpauseText.gameObject.SetActive(false);

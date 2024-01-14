@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class Stress_Controller : MonoBehaviour
 {
     public Global_Container globalScript;
     public PlayerMovement player;
     string currentPose;
-    public Image stressBar; //Controls the stressBar image
+
+    public Slider stressBar;
+    public Image sliderFillArea;
+    public Color goodStress;
+    public Color badStress;
+
 
     public float stressValue = 1f; //Value of stress, idealy will never go over 100 can, however, be negative, for gaemplay reasons
 
@@ -39,15 +44,16 @@ public class Stress_Controller : MonoBehaviour
     {
         stressValue += Stress;
         stressValue = Mathf.Clamp(stressValue, 0, 100);
-        stressBar.fillAmount = stressValue / 100f;
+        stressBar.value = stressValue / 100f;
+        sliderFillArea.color = Color.Lerp(goodStress, badStress, stressBar.value);
     }
 
     public void destress (float Stress) //Can be called to Stress the player by an ammount given
     {
         stressValue -= Stress;
         stressValue = Mathf.Clamp(stressValue, 0, 100);
-        stressBar.fillAmount = stressValue / 100f;
-
+        stressBar.value = stressValue / 100f;
+        sliderFillArea.color = Color.Lerp(goodStress, badStress, stressBar.value);
     }
     void naturalStressGeneration() //Naturally generates stress if player is falling
     {
