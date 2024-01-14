@@ -68,7 +68,7 @@ public class MasterMenu : MonoBehaviour
 
     public void ButtonLoadMenu()
     {
-        Unpause();
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
 
