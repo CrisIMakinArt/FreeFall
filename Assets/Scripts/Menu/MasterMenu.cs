@@ -8,6 +8,7 @@ public class MasterMenu : MonoBehaviour
 {
     public GameObject menuUI;
     public GameObject optionsUI;
+    public GameObject endScreenUI;
 
     bool unpausing = false;
     public int unpausingTime = 30;

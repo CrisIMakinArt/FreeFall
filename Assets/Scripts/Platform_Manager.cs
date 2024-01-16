@@ -9,7 +9,7 @@ public class Platform_Manager : MonoBehaviour
     public float distance;
     public float speed;
 
-    public bool goingRight;
+    bool goingRight;
 
     private void OnValidate()
     {

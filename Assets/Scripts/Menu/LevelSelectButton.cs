@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,17 +8,21 @@ using TMPro;
 public class LevelSelectButton : MonoBehaviour
 {
     public TMP_Dropdown levelSelectDropDown;
+    public Popup popup;
 
     public void ButtonPress()
     {
         string levelName = levelSelectDropDown.options[levelSelectDropDown.value].text;
-        try
-        {
+        if (Application.CanStreamedLevelBeLoaded(levelName))
             SceneManager.LoadScene(levelName);
-        }
-        catch 
+        else
         {
-            Debug.Log("invalid Scene name " + levelName);
+            popup.AlertPopup("Please Choose a level");
         }
+    }
+
+    public void DebugSkipToTestScene()
+    {
+        SceneManager.LoadScene("TestScene");
     }
 }
