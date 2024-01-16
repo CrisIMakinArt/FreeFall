@@ -24,7 +24,6 @@ public class MineBehaviour : MonoBehaviour
         float playerDist = Vector2.Distance(player.transform.position, transform.position);
         if (playerDist <= detectionRadius)
         {
-            Debug.Log("targetting");
             targeting = true;
         }
         else 

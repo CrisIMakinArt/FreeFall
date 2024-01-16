@@ -1,12 +1,51 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class Platform_Manager : MonoBehaviour
+{
+    private Vector3 origin;
+    public bool cloud, basic, breakable;
+
+    public float distance;
+    public float speed;
+
+    public bool goingRight;
+
+    private void OnValidate()
+    {
+        origin = transform.position;
+    }
+
+    private void Start()
+    {
+        goingRight = Random.value > 0.5f;
+        origin = transform.position;        
+    }
+
+    private void Update()
+    {
+        if (transform.position.x >= origin.x + distance)
+            goingRight = false;
+        else if (transform.position.x <= origin.x - distance)
+            goingRight = true;
+
+        if (goingRight)
+            transform.position += Vector3.right * speed * Time.deltaTime;
+        else
+            transform.position -= Vector3.right * speed * Time.deltaTime;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(origin, origin + new Vector3(distance, 0));
+        Gizmos.DrawLine(origin, origin + new Vector3(-distance, 0));
+
+        Gizmos.DrawSphere(origin + new Vector3(distance, 0), .2f);
+        Gizmos.DrawSphere(origin - new Vector3(distance, 0), .2f);
+    }
+}
+
+/*public class Platform_Manager : MonoBehaviour
 {
     SpriteRenderer sprite;
     Transform platform;
@@ -122,4 +161,4 @@ public class Platform_Manager : MonoBehaviour
     }
 
 }
-
+*/
