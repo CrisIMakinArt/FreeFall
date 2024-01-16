@@ -25,7 +25,7 @@ public class MasterMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!menuUI.activeSelf)
+            if (!menuUI.activeSelf && !endScreenUI.activeSelf)
                 Pause();
             else
                 Unpause();
