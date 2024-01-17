@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e6783fe8af1d4b4884754c52ac06910, type: 3}
   m_Color: {r: 0.3301887, g: 0.2289516, b: 0.2289516, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -355,9 +355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a7dc09882068f4fb8576768526936f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdVelocity: 3
   playerVelocity: 3
   TerminalVelocity: 500
-  holdVelocity: 3
   FallingThreshold: -0.00001
   Falling: 1
   Acceleration: 20
