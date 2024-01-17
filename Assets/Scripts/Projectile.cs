@@ -12,15 +12,18 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     bool kill = false;
     float timer = 10;
+    int speed = 200;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        transform.Translate((transform.forward * speed * Time.deltaTime));
         if (timer < 0)
         {
             kill = true;
@@ -41,17 +44,10 @@ public class Projectile : MonoBehaviour
 
 
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            rb.gravityScale = -1.5f;
-        }
-            
-    }
 
     void destroyThis()
     {
         Destroy(this.gameObject);
     }
+
 }
