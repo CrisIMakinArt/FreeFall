@@ -9,6 +9,8 @@ public class Platform_Manager : MonoBehaviour
     public float distance;
     public float speed;
 
+    private PlayerMovement player;
+
     bool goingRight;
 
     private void OnValidate()
@@ -19,7 +21,7 @@ public class Platform_Manager : MonoBehaviour
     private void Start()
     {
         goingRight = Random.value > 0.5f;
-        origin = transform.position;        
+        origin = transform.position;
     }
 
     private void Update()
@@ -43,7 +45,18 @@ public class Platform_Manager : MonoBehaviour
         Gizmos.DrawSphere(origin + new Vector3(distance, 0), .2f);
         Gizmos.DrawSphere(origin - new Vector3(distance, 0), .2f);
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player = other.gameObject.GetComponent<PlayerMovement>();
+            if (basic) { player.Reset();  }
+            if (breakable) { Destroy(this.gameObject); }
+        }
+    }
 }
+
 
 /*public class Platform_Manager : MonoBehaviour
 {

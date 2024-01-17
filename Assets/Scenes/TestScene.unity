@@ -1785,6 +1785,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1170478427}
     m_Modifications:
     - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
+      propertyPath: basic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
@@ -1852,6 +1856,10 @@ PrefabInstance:
     - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
       propertyPath: distance
       value: 13.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
+      propertyPath: breakable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5424093017177179742, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
       propertyPath: m_Name
@@ -5590,6 +5598,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1170478427}
     m_Modifications:
+    - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
+      propertyPath: basic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
+      propertyPath: distance
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5424093017177179742, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
       propertyPath: m_Name
       value: Moving Platform Variant
@@ -5704,6 +5720,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1170478427}
     m_Modifications:
+    - target: {fileID: 4311544547248540556, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
+      propertyPath: breakable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5424093017177179742, guid: 53c7a415d656a5947a03c2650f53a1c2, type: 3}
       propertyPath: m_Name
       value: Moving Platform Variant (1)
