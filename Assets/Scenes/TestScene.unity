@@ -6134,6 +6134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2625865986310609099, guid: 412ddfc0da8b21b4e847ed97928f7ddb, type: 3}
+      propertyPath: masterMenu
+      value: 
+      objectReference: {fileID: 173760017}
     - target: {fileID: 4418930005475785047, guid: 412ddfc0da8b21b4e847ed97928f7ddb, type: 3}
       propertyPath: m_Name
       value: Finish Line
